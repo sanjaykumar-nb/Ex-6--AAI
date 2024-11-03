@@ -1,9 +1,10 @@
-<H3>ENTER YOUR NAME : SANJAYKUMAR N.B</H3>  
-<H3>ENTER YOUR REGISTER NO: 212223230189</H3>  
-<H3>EX. NO.6</H3>
-<H3>DATE : 21/10/2024</H3>
+<H3>NAME: SANJAYKUMAR N B</H3>
+<H3>REG NO.: 212223230189</H3>
+<H3>EX.NO.6</H3>
+<H3>DATE: 23.04 2024</H3>
 <H1 ALIGN =CENTER>Implementation of Semantic ANalysis</H1>
-<H3>Aim: to perform Parts of speech identification and Synonym using Natural Language Processing (NLP) techniques. </H3> 
+<H3>Aim: </H3>
+To perform Parts of speech identification and Synonym using Natural Language Processing (NLP) techniques.  
  <BR>
 <h3>Algorithm:</h3>
 Step 1: Import the nltk library.<br>
@@ -17,12 +18,53 @@ Step 5:Iterate through each word in the tokenized text.<br>
 •	Extract synonyms and antonyms using lemma.name() and lemma.antonyms()[0].name() respectively.<br>
 •	Print the unique sets of synonyms and antonyms.
 <H3>Program:</H3>
+
+```py
+import nltk
+from nltk.corpus import wordnet
+
+nltk.download('punkt')
+nltk.download('averaged_perceptron_tagger')
+nltk.download('wordnet')
+
+def get_synonyms(word):
+    synonyms = set()
+    for syn in wordnet.synsets(word):
+        for lemma in syn.lemmas():
+            synonyms.add(lemma.name())
+    return synonyms
+
+def process_text_file(file_path):
+    with open(file_path, 'r') as file:
+        text = file.read()
+    return text  # Return the processed text
+
+text = process_text_file('sample.txt')
+
+# Tokenize the text into sentences
+sentences = nltk.sent_tokenize(text)
+
+for sentence in sentences:
+    # Tokenize each sentence into words
+    words = nltk.word_tokenize(sentence)
+
+    # Perform part-of-speech tagging
+    pos_tags = nltk.pos_tag(words)
+
+    # Extract verbs
+    verbs = [word for word, pos in pos_tags if pos.startswith('V')]
+
+    # Get synonyms for each verb
+    for verb in verbs:
+        synonyms = get_synonyms(verb)
+        print(f"Verb: {verb}")
+        print(f"Synonyms: {', '.join(synonyms)}\n")
+
 ```
 
-
-```
 <H3>Output</H3>
 
+![out](https://github.com/abdulwasih2003/Ex-6--AAI/assets/91781810/33091ee6-69ae-49f3-b808-8674c2b4f9b6)
 
 <H3>Result:</H3>
-Thus ,the program to perform the Parts of Speech identification and Synonymis executed sucessfully.
+Thus, the program to perform the Parts of Speech identification and Synonymis is executed sucessfully.
